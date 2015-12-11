@@ -38,7 +38,7 @@ namespace NASA_Rover_Images.Utils
             {
                 Error error = _jsonSerializer.Deserialize<Error>(jsonTextReader);
 
-                return new Tuple<bool, IReadOnlyList<Photo>, Error>(true, null, error);
+                return new Tuple<bool, IReadOnlyList<Photo>, Error>(false, null, error);
             }
         }
     }
