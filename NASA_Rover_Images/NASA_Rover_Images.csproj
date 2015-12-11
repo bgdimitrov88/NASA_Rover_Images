@@ -147,6 +147,7 @@
     <Content Include="Resources\OpportunityDescription.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Question.png" />
     <Content Include="Resources\SpiritDescription.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

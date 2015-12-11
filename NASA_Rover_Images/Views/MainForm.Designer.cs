@@ -73,9 +73,11 @@
             // 
             // roverInfoButton
             // 
-            this.roverInfoButton.Location = new System.Drawing.Point(280, 8);
+            this.roverInfoButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("roverInfoButton.BackgroundImage")));
+            this.roverInfoButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.roverInfoButton.Location = new System.Drawing.Point(282, 8);
             this.roverInfoButton.Name = "roverInfoButton";
-            this.roverInfoButton.Size = new System.Drawing.Size(20, 23);
+            this.roverInfoButton.Size = new System.Drawing.Size(22, 22);
             this.roverInfoButton.TabIndex = 12;
             this.roverInfoButton.UseVisualStyleBackColor = true;
             this.roverInfoButton.Click += new System.EventHandler(this.roverInfoButton_Click);
