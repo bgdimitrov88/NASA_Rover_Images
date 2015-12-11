@@ -5,6 +5,10 @@ namespace NASA_Rover_Images.Models
 {
     public class Rover
     {
+        public const string Curiosity = "Curiosity";
+        public const string Opportunity = "Opportunity";
+        public const string Spirit = "Spirit";
+        
         [JsonProperty("id")]
         public int ID { get; set; }
         [JsonProperty("name")]

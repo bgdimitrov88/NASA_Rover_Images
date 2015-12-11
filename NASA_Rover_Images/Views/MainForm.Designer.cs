@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.roverInfoButton = new System.Windows.Forms.Button();
+            this.dateLabel = new System.Windows.Forms.Label();
             this.autoRefreshCheckBox = new System.Windows.Forms.CheckBox();
             this.solNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.paginatorPanel = new System.Windows.Forms.Panel();
@@ -45,7 +47,6 @@
             this.solLabel = new System.Windows.Forms.Label();
             this.roverNameLabel = new System.Windows.Forms.Label();
             this.roverNameComboBox = new System.Windows.Forms.ComboBox();
-            this.dateLabel = new System.Windows.Forms.Label();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.solNumericUpDown)).BeginInit();
             this.paginatorPanel.SuspendLayout();
@@ -54,6 +55,7 @@
             // 
             // MainPanel
             // 
+            this.MainPanel.Controls.Add(this.roverInfoButton);
             this.MainPanel.Controls.Add(this.dateLabel);
             this.MainPanel.Controls.Add(this.autoRefreshCheckBox);
             this.MainPanel.Controls.Add(this.solNumericUpDown);
@@ -68,6 +70,23 @@
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(316, 418);
             this.MainPanel.TabIndex = 0;
+            // 
+            // roverInfoButton
+            // 
+            this.roverInfoButton.Location = new System.Drawing.Point(280, 8);
+            this.roverInfoButton.Name = "roverInfoButton";
+            this.roverInfoButton.Size = new System.Drawing.Size(20, 23);
+            this.roverInfoButton.TabIndex = 12;
+            this.roverInfoButton.UseVisualStyleBackColor = true;
+            this.roverInfoButton.Click += new System.EventHandler(this.roverInfoButton_Click);
+            // 
+            // dateLabel
+            // 
+            this.dateLabel.AutoSize = true;
+            this.dateLabel.Location = new System.Drawing.Point(128, 132);
+            this.dateLabel.Name = "dateLabel";
+            this.dateLabel.Size = new System.Drawing.Size(0, 13);
+            this.dateLabel.TabIndex = 11;
             // 
             // autoRefreshCheckBox
             // 
@@ -203,14 +222,6 @@
             this.roverNameComboBox.TabIndex = 0;
             this.roverNameComboBox.SelectedValueChanged += new System.EventHandler(this.roverNameComboBox_SelectedValueChanged);
             // 
-            // dateLabel
-            // 
-            this.dateLabel.AutoSize = true;
-            this.dateLabel.Location = new System.Drawing.Point(128, 132);
-            this.dateLabel.Name = "dateLabel";
-            this.dateLabel.Size = new System.Drawing.Size(0, 13);
-            this.dateLabel.TabIndex = 11;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -249,6 +260,7 @@
         private System.Windows.Forms.NumericUpDown solNumericUpDown;
         private System.Windows.Forms.CheckBox autoRefreshCheckBox;
         private System.Windows.Forms.Label dateLabel;
+        private System.Windows.Forms.Button roverInfoButton;
     }
 }
 

@@ -10,7 +10,7 @@ namespace NASA_Rover_Images.Views
 {
     public partial class MainForm : Form, IMainView
     {
-        private IPresenter _presenter;
+        private IMainFormPresenter _presenter;
         private Paginator _paginator;
         private bool _initialized;
         public bool AutoRefresh { get; set; }
@@ -20,7 +20,7 @@ namespace NASA_Rover_Images.Views
         {
             InitializeComponent();
 
-            _presenter = new Presenter(this);
+            _presenter = new MainFormPresenter(this);
             _paginator = new Paginator(12);
             AutoRefresh = false;
             _initialized = false;
@@ -155,5 +155,10 @@ namespace NASA_Rover_Images.Views
         }
 
         #endregion
+
+        private void roverInfoButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
