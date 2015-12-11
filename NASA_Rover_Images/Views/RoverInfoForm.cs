@@ -2,10 +2,10 @@
 using NASA_Rover_Images.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.IO;
 
 namespace NASA_Rover_Images.Views
 {
@@ -48,7 +48,12 @@ namespace NASA_Rover_Images.Views
         public async Task SetRover(string roverName)
         {
             _roverName = roverName;
-            descriptionTextBox.Text = roverName + " description goes here...";
+
+            using (StreamReader streamReader = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "/Resources/" + roverName + "Description.txt"))
+            {
+                descriptionTextBox.Text = streamReader.ReadToEnd();
+            }
+
             nameTextBox.Text = roverName;
             linkLabelNASA.Links.Add(_roverLinks[roverName]);
 
