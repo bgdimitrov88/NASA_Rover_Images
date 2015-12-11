@@ -108,6 +108,7 @@
             this.linkLabelNASA.TabIndex = 8;
             this.linkLabelNASA.TabStop = true;
             this.linkLabelNASA.Text = "Link to NASA website";
+            this.linkLabelNASA.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelNASA_LinkClicked);
             // 
             // RoverInfoForm
             // 

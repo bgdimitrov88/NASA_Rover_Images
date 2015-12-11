@@ -13,6 +13,7 @@ namespace NASA_Rover_Images.Views
         private IMainFormPresenter _presenter;
         private Paginator _paginator;
         private bool _initialized;
+        private IRoverInfoView _roverInfoView;
         public bool AutoRefresh { get; set; }
         public IRequest PhotosRequest {  get { return _presenter.Request; } }
 
@@ -22,10 +23,11 @@ namespace NASA_Rover_Images.Views
 
             _presenter = new MainFormPresenter(this);
             _paginator = new Paginator(12);
+            _roverInfoView = new RoverInfoForm();
             AutoRefresh = false;
             _initialized = false;
         }
-        
+
         protected override void OnLoad(EventArgs e)
         {
             BindFromModel();
@@ -114,6 +116,12 @@ namespace NASA_Rover_Images.Views
                 refreshPhotos();
             }
         }
+        
+        private async void roverInfoButton_Click(object sender, EventArgs e)
+        {
+            await _roverInfoView.SetRover(roverNameComboBox.SelectedValue.ToString());
+            _roverInfoView.ShowRoverInfo();
+        }
 
         #endregion
 
@@ -155,10 +163,5 @@ namespace NASA_Rover_Images.Views
         }
 
         #endregion
-
-        private void roverInfoButton_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

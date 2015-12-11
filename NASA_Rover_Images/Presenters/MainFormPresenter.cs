@@ -22,9 +22,9 @@ namespace NASA_Rover_Images.Presenters
             _mainView = mainView;
             _rovers = new Dictionary<string, IReadOnlyList<string>>()
             {
-                { Rover.Curiosity, new List<string>() { "FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM" } },
-                { Rover.Opportunity, new List<string>() { "FHAZ", "RHAZ", "NAVCAM", "PANCAM", "MINITES" } },
-                { Rover.Spirit, new List<string>() { "FHAZ", "RHAZ", "NAVCAM", "PANCAM", "MINITES" } }
+                { Rover.Curiosity, new List<string>() { Camera.FHAZ, Camera.RHAZ, Camera.MAST, Camera.CHEMCAM, Camera.MAHLI, Camera.MARDI, Camera.NAVCAM } },
+                { Rover.Opportunity, new List<string>() { Camera.FHAZ, Camera.RHAZ, Camera.NAVCAM, Camera.PANCAM, Camera.MINITES } },
+                { Rover.Spirit, new List<string>() { Camera.FHAZ, Camera.RHAZ, Camera.NAVCAM, Camera.PANCAM, Camera.MINITES } }
             };
 
             _request = new Request() { Camera = _rovers.First().Value.First(), Rover = _rovers.Keys.First(), Sol = 1000 };
