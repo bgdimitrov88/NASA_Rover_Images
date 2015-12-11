@@ -31,7 +31,10 @@ namespace NASA_Rover_Images.Views
             BindFromModel();
             _initialized = true;
         }
-        
+
+
+        #region IMainView
+
         public void ShowPhotos(IReadOnlyList<Photo> photos)
         {
             if (photos.Count > 0)
@@ -47,6 +50,8 @@ namespace NASA_Rover_Images.Views
             photosFlowLayoutPanel.Controls.Add(new Label() { Text = error.Errors });
             _paginator.SetPhotos(null);
         }
+
+        #endregion
 
         #region Events
         private void getButton_Click(object sender, EventArgs e)
@@ -112,6 +117,8 @@ namespace NASA_Rover_Images.Views
 
         #endregion
 
+        #region Helpers
+
         private void BindFromModel()
         {
             paginatorBindingSource.DataSource = _paginator;
@@ -146,5 +153,7 @@ namespace NASA_Rover_Images.Views
                 dateLabel.Text = DateTime.Parse(((Photo)_paginator.CurrentPageContent.First()).EarthDate).ToShortDateString();
             }
         }
+
+        #endregion
     }
 }
