@@ -1,11 +1,10 @@
-﻿using NASA_Rover_Images.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
 namespace NASA_Rover_Images.Utils
 {
-    public class Paginator : INotifyPropertyChanged
+    public class Paginator : IPaginator, INotifyPropertyChanged
     {
         private IReadOnlyList<object> _items;
         private IReadOnlyList<object> _currentPageContent;
@@ -70,16 +69,16 @@ namespace NASA_Rover_Images.Utils
             get { return _currentPageContent;  }
         }
 
-        public int TotalPages { get; set; }
+        public int TotalPages { get; private set; }
 
-        public int CurrentPage { get; set; }
+        public int CurrentPage { get; private set; }
 
-        public int ItemsPerPage { get; set; }
+        public int ItemsPerPage { get; private set; }
 
         public string PagingInfo
         {
             get { return _pagingInfo; }
-            set
+            private set
             {
                 _pagingInfo = value;
                 OnPropertyChanged("PagingInfo");

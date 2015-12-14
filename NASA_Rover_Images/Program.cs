@@ -1,6 +1,8 @@
-﻿using NASA_Rover_Images.Views;
+﻿using NASA_Rover_Images.Unity;
+using Microsoft.Practices.Unity;
 using System;
 using System.Windows.Forms;
+using NASA_Rover_Images.Views;
 
 namespace NASA_Rover_Images
 {
@@ -12,9 +14,16 @@ namespace NASA_Rover_Images
         [STAThread]
         static void Main()
         {
+            Application.ApplicationExit += OnExit;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(UnityConfig.GetConfiguredContainer().Resolve<MainForm>());
+        }
+
+        private static void OnExit(object sender, EventArgs e)
+        {
+            UnityConfig.GetConfiguredContainer().Dispose();
         }
     }
 }
