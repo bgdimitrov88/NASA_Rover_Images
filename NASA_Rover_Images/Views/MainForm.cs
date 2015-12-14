@@ -86,6 +86,8 @@ namespace NASA_Rover_Images.Views
             {
                 _presenter.GetPhotos();
             }
+            
+            _roverInfoView.SetRover(roverName);
         }
 
         private void cameraComboBox_SelectedValueChanged(object sender, EventArgs e)

@@ -13,7 +13,8 @@ namespace NASA_Rover_Images.Views
     {
         private readonly INasaApiCommunicator _nasaApiCommunicator;
         private readonly IReadOnlyDictionary<string, LinkLabel.Link> _roverLinks;
-        private const string loadError = "Failed to load data";
+        private const string _loadError = "Failed to load data";
+        private const string _loadingText = "Loading...";
         private string _roverName;
 
         public RoverInfoForm()
@@ -49,13 +50,16 @@ namespace NASA_Rover_Images.Views
         {
             _roverName = roverName;
 
+            nameTextBox.Text = roverName;
+            landingDateTextBox.Text = _loadingText;
+            totalPhotosTextBox.Text = _loadingText;
+            descriptionTextBox.Text = _loadingText;
+            linkLabelNASA.Links.Add(_roverLinks[roverName]);
+
             using (StreamReader streamReader = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "/Resources/" + roverName + "Description.txt"))
             {
                 descriptionTextBox.Text = streamReader.ReadToEnd();
             }
-
-            nameTextBox.Text = roverName;
-            linkLabelNASA.Links.Add(_roverLinks[roverName]);
 
             //Get a sample picture to extract variable field data - total photos, max sol etc.
             Tuple<bool, IReadOnlyList<Photo>, Error> apiResult = await _nasaApiCommunicator.GetPhotos(roverName, Camera.FHAZ, 50);
@@ -69,8 +73,8 @@ namespace NASA_Rover_Images.Views
             }
             else
             {
-                landingDateTextBox.Text = loadError;
-                totalPhotosTextBox.Text = loadError;
+                landingDateTextBox.Text = _loadError;
+                totalPhotosTextBox.Text = _loadError;
             }
         }
 
