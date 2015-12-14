@@ -114,10 +114,10 @@
     <Compile Include="Presenters\MainForm\PhotosChangedEventHandler.cs" />
     <Compile Include="Presenters\RoverInfo\RoverInfoPresenter.cs" />
     <Compile Include="Unity\UnityConfig.cs" />
-    <Compile Include="Utils\INasaApiCommunicator.cs" />
-    <Compile Include="Utils\IPaginator.cs" />
-    <Compile Include="Utils\NasaApiCommunicator.cs" />
-    <Compile Include="Utils\Paginator.cs" />
+    <Compile Include="Utils\NasaApiCommunicator\INasaApiCommunicator.cs" />
+    <Compile Include="Utils\Paginator\IPaginator.cs" />
+    <Compile Include="Utils\NasaApiCommunicator\NasaApiCommunicator.cs" />
+    <Compile Include="Utils\Paginator\Paginator.cs" />
     <Compile Include="Views\IMainView.cs" />
     <Compile Include="Presenters\MainForm\IMainFormPresenter.cs" />
     <Compile Include="Views\IRoverInfoView.cs" />

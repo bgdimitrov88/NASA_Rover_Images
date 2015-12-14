@@ -14,7 +14,6 @@ namespace NASA_Rover_Images.Views
         private bool _initialized;
         private IRoverInfoView _roverInfoView;
         public bool AutoRefresh { get; set; }
-        public IRequest PhotosRequest {  get { return _presenter.Request; } }
 
         public MainForm(IMainFormPresenter mainFormPresenter, IPaginator paginator, IRoverInfoView roverInfoView)
         {
