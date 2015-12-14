@@ -118,6 +118,9 @@
     <Compile Include="Utils\Paginator\IPaginator.cs" />
     <Compile Include="Utils\NasaApiCommunicator\NasaApiCommunicator.cs" />
     <Compile Include="Utils\Paginator\Paginator.cs" />
+    <Compile Include="Views\ContextMenus\PhotoContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Views\IMainView.cs" />
     <Compile Include="Presenters\MainForm\IMainFormPresenter.cs" />
     <Compile Include="Views\IRoverInfoView.cs" />

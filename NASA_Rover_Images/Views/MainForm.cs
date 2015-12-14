@@ -4,6 +4,8 @@ using System;
 using System.Windows.Forms;
 using System.Linq;
 using NASA_Rover_Images.Presenters.MainForm;
+using NASA_Rover_Images.Views.ContextMenus;
+using System.ComponentModel;
 
 namespace NASA_Rover_Images.Views
 {
@@ -57,7 +59,7 @@ namespace NASA_Rover_Images.Views
             BindFromModel();
             _initialized = true;
         }
-        
+
         #region Events
         private void getButton_Click(object sender, EventArgs e)
         {
@@ -85,7 +87,7 @@ namespace NASA_Rover_Images.Views
             {
                 _presenter.GetPhotos();
             }
-            
+
             _roverInfoView.SetRover(roverName);
         }
 
@@ -99,11 +101,23 @@ namespace NASA_Rover_Images.Views
             }
         }
 
-        private void photo_Clicked(object sender, EventArgs e)
+        private void photo_Clicked(object sender, MouseEventArgs e)
         {
-            PictureBox control = (PictureBox) sender;
+            PictureBox control = (PictureBox)sender;
 
-            System.Diagnostics.Process.Start(control.ImageLocation);
+            if (e.Button == MouseButtons.Left)
+            {
+                System.Diagnostics.Process.Start(control.ImageLocation);
+            }
+        }
+
+        private void photo_Loaded(object sender, AsyncCompletedEventArgs e)
+        {
+            PictureBox control = (PictureBox)sender;
+            string imgSrc = control.ImageLocation;
+            string imgName = imgSrc.Split('/').LastOrDefault();
+
+            control.ContextMenu = new PhotoContextMenu(imgName, control.Image);
         }
 
         private void previousButton_Click(object sender, EventArgs e)
@@ -121,7 +135,7 @@ namespace NASA_Rover_Images.Views
                 refreshPhotos();
             }
         }
-        
+
         private async void roverInfoButton_Click(object sender, EventArgs e)
         {
             await _roverInfoView.SetRover(roverNameComboBox.SelectedValue.ToString());
@@ -154,11 +168,12 @@ namespace NASA_Rover_Images.Views
                         ImageLocation = ((Photo)photo).ImgSrc,
                         Width = 64,
                         Height = 64,
-                        SizeMode = PictureBoxSizeMode.StretchImage,
+                        SizeMode = PictureBoxSizeMode.Zoom,
                         Cursor = Cursors.Hand,
                         BorderStyle = BorderStyle.FixedSingle
                     };
-                    pictureBox.Click += photo_Clicked;
+                    pictureBox.MouseClick += photo_Clicked;
+                    pictureBox.LoadCompleted += photo_Loaded;
 
                     photosFlowLayoutPanel.Controls.Add(pictureBox);
                 }
