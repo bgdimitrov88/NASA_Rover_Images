@@ -124,6 +124,7 @@
             this.Controls.Add(this.totalPhotosLabel);
             this.Controls.Add(this.landingDateLabel);
             this.Controls.Add(this.nameLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RoverInfoForm";
             this.Text = "RoverInfoForm";

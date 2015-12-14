@@ -37,7 +37,6 @@
             this.solNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.paginatorPanel = new System.Windows.Forms.Panel();
             this.paginationLabel = new System.Windows.Forms.Label();
-            this.paginatorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nextButton = new System.Windows.Forms.Button();
             this.previousButton = new System.Windows.Forms.Button();
             this.photosFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -47,6 +46,7 @@
             this.solLabel = new System.Windows.Forms.Label();
             this.roverNameLabel = new System.Windows.Forms.Label();
             this.roverNameComboBox = new System.Windows.Forms.ComboBox();
+            this.paginatorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.solNumericUpDown)).BeginInit();
             this.paginatorPanel.SuspendLayout();
@@ -135,10 +135,6 @@
             this.paginationLabel.TabIndex = 11;
             this.paginationLabel.Text = "0 of 0";
             // 
-            // paginatorBindingSource
-            // 
-            this.paginatorBindingSource.DataSource = typeof(NASA_Rover_Images.Utils.Paginator);
-            // 
             // nextButton
             // 
             this.nextButton.Location = new System.Drawing.Point(212, 230);
@@ -172,7 +168,7 @@
             this.getButton.Name = "getButton";
             this.getButton.Size = new System.Drawing.Size(75, 23);
             this.getButton.TabIndex = 7;
-            this.getButton.Text = "GET";
+            this.getButton.Text = "Preview";
             this.getButton.UseVisualStyleBackColor = true;
             this.getButton.Click += new System.EventHandler(this.getButton_Click);
             // 
@@ -223,6 +219,10 @@
             this.roverNameComboBox.Size = new System.Drawing.Size(172, 21);
             this.roverNameComboBox.TabIndex = 0;
             this.roverNameComboBox.SelectedValueChanged += new System.EventHandler(this.roverNameComboBox_SelectedValueChanged);
+            // 
+            // paginatorBindingSource
+            // 
+            this.paginatorBindingSource.DataSource = typeof(NASA_Rover_Images.Utils.Paginator);
             // 
             // MainForm
             // 
