@@ -1,31 +1,56 @@
 ﻿using NASA_Rover_Images.Models;
-using NASA_Rover_Images.Presenters;
 using NASA_Rover_Images.Utils;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
+using NASA_Rover_Images.Presenters.MainForm;
 
 namespace NASA_Rover_Images.Views
 {
     public partial class MainForm : Form, IMainView
     {
         private IMainFormPresenter _presenter;
-        private Paginator _paginator;
+        private IPaginator _paginator;
         private bool _initialized;
         private IRoverInfoView _roverInfoView;
         public bool AutoRefresh { get; set; }
         public IRequest PhotosRequest {  get { return _presenter.Request; } }
 
-        public MainForm()
+        public MainForm(IMainFormPresenter mainFormPresenter, IPaginator paginator, IRoverInfoView roverInfoView)
         {
             InitializeComponent();
 
-            _presenter = new MainFormPresenter(this);
-            _paginator = new Paginator(12);
-            _roverInfoView = new RoverInfoForm();
+            _presenter = mainFormPresenter;
+            _paginator = paginator;
+            _roverInfoView = roverInfoView;
             AutoRefresh = false;
             _initialized = false;
+
+            _presenter.PhotosUpdated += OnPhotosUpdated;
+        }
+
+        private void OnPhotosUpdated(object sender, PhotosChangedEventArgs e)
+        {
+            if(e.Photos != null)
+            {
+                if(e.Photos.Count > 0)
+                {
+                    _paginator.SetPhotos(e.Photos);
+                    refreshPhotos();
+                }
+                else
+                {
+                    photosFlowLayoutPanel.Controls.Clear();
+                    photosFlowLayoutPanel.Controls.Add(new Label() { Text = "No Photos Found" });
+                    _paginator.SetPhotos(null);
+                }
+            }
+            else if(e.Error != null)
+            {
+                photosFlowLayoutPanel.Controls.Clear();
+                photosFlowLayoutPanel.Controls.Add(new Label() { Text = e.Error.Errors });
+                _paginator.SetPhotos(null);
+            }
         }
 
         protected override void OnLoad(EventArgs e)
@@ -33,32 +58,11 @@ namespace NASA_Rover_Images.Views
             BindFromModel();
             _initialized = true;
         }
-
-
-        #region IMainView
-
-        public void ShowPhotos(IReadOnlyList<Photo> photos)
-        {
-            if (photos.Count > 0)
-            {
-                _paginator.SetPhotos(photos);
-                refreshPhotos();
-            }
-        }
-
-        public void ShowError(Error error)
-        {
-            photosFlowLayoutPanel.Controls.Clear();
-            photosFlowLayoutPanel.Controls.Add(new Label() { Text = error.Errors });
-            _paginator.SetPhotos(null);
-        }
-
-        #endregion
-
+        
         #region Events
         private void getButton_Click(object sender, EventArgs e)
         {
-            _presenter.GetImages();
+            _presenter.GetPhotos();
         }
 
         private void solNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -67,7 +71,7 @@ namespace NASA_Rover_Images.Views
 
             if (_initialized && AutoRefresh)
             {
-                _presenter.GetImages();
+                _presenter.GetPhotos();
             }
         }
 
@@ -80,7 +84,7 @@ namespace NASA_Rover_Images.Views
 
             if (_initialized && AutoRefresh)
             {
-                _presenter.GetImages();
+                _presenter.GetPhotos();
             }
         }
 
@@ -90,7 +94,7 @@ namespace NASA_Rover_Images.Views
 
             if (_initialized && AutoRefresh)
             {
-                _presenter.GetImages();
+                _presenter.GetPhotos();
             }
         }
 

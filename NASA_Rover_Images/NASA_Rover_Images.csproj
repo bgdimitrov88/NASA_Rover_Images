@@ -109,15 +109,17 @@
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Rover.cs" />
-    <Compile Include="Presenters\IRoverInfoPresenter.cs" />
-    <Compile Include="Presenters\RoverInfoPresenter.cs" />
+    <Compile Include="Presenters\RoverInfo\IRoverInfoPresenter.cs" />
+    <Compile Include="Presenters\MainForm\PhotosChangedEventArgs.cs" />
+    <Compile Include="Presenters\MainForm\PhotosChangedEventHandler.cs" />
+    <Compile Include="Presenters\RoverInfo\RoverInfoPresenter.cs" />
     <Compile Include="Unity\UnityConfig.cs" />
     <Compile Include="Utils\INasaApiCommunicator.cs" />
     <Compile Include="Utils\IPaginator.cs" />
     <Compile Include="Utils\NasaApiCommunicator.cs" />
     <Compile Include="Utils\Paginator.cs" />
     <Compile Include="Views\IMainView.cs" />
-    <Compile Include="Presenters\IMainFormPresenter.cs" />
+    <Compile Include="Presenters\MainForm\IMainFormPresenter.cs" />
     <Compile Include="Views\IRoverInfoView.cs" />
     <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>
@@ -125,7 +127,7 @@
     <Compile Include="Views\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\MainFormPresenter.cs" />
+    <Compile Include="Presenters\MainForm\MainFormPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\RoverInfoForm.cs">

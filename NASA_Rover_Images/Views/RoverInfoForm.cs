@@ -57,7 +57,7 @@ namespace NASA_Rover_Images.Views
             nameTextBox.Text = roverName;
             linkLabelNASA.Links.Add(_roverLinks[roverName]);
 
-            //Get a sample picture to extract label data
+            //Get a sample picture to extract variable field data - total photos, max sol etc.
             Tuple<bool, IReadOnlyList<Photo>, Error> apiResult = await _nasaApiCommunicator.GetPhotos(roverName, Camera.FHAZ, 50);
 
             if (apiResult.Item1)

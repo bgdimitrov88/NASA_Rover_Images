@@ -1,25 +1,19 @@
-﻿using NASA_Rover_Images.Views;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NASA_Rover_Images.Models;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.IO;
 using System.Linq;
 using NASA_Rover_Images.Utils;
 using System;
 
-namespace NASA_Rover_Images.Presenters
+namespace NASA_Rover_Images.Presenters.MainForm
 {
     public class MainFormPresenter : IMainFormPresenter
     {
-        private readonly IMainView _mainView;
         private readonly IReadOnlyDictionary<string, IReadOnlyList<string>> _rovers;
         private readonly IRequest _request;
         private readonly INasaApiCommunicator _nasaApiCommunicator;
-
-        public MainFormPresenter(IMainView mainView)
+        
+        public MainFormPresenter(INasaApiCommunicator nasaApiCommunicator, IRequest initialRequest)
         {
-            _mainView = mainView;
             _rovers = new Dictionary<string, IReadOnlyList<string>>()
             {
                 { Rover.Curiosity, new List<string>() { Camera.FHAZ, Camera.RHAZ, Camera.MAST, Camera.CHEMCAM, Camera.MAHLI, Camera.MARDI, Camera.NAVCAM } },
@@ -27,8 +21,23 @@ namespace NASA_Rover_Images.Presenters
                 { Rover.Spirit, new List<string>() { Camera.FHAZ, Camera.RHAZ, Camera.NAVCAM, Camera.PANCAM, Camera.MINITES } }
             };
 
-            _request = new Request() { Camera = _rovers.First().Value.First(), Rover = _rovers.Keys.First(), Sol = 1000 };
-            _nasaApiCommunicator = new NasaApiCommunicator();
+            //Initial request object
+            _request = initialRequest;
+            _request.Camera = _rovers.First().Value.First();
+            _request.Rover = _rovers.Keys.First();
+            _request.Sol = 1000;
+
+            _nasaApiCommunicator = nasaApiCommunicator;            
+        }
+
+        public event PhotosChangedEventHandler PhotosUpdated;
+        // Invoke the Changed event; called whenever list changes
+        protected virtual void OnPhotosUpdated(PhotosChangedEventArgs e)
+        {
+            if (PhotosUpdated != null)
+            {
+                PhotosUpdated(this, e);
+            }
         }
         
         public IReadOnlyDictionary<string, IReadOnlyList<string>> Rovers
@@ -47,18 +56,18 @@ namespace NASA_Rover_Images.Presenters
             }
         }
 
-        public async void GetImages()
+        public async void GetPhotos()
         {
             //Cannot use out parameters in async tasks so must return a tuple
             Tuple<bool, IReadOnlyList<Photo>, Error> _apiResult = await _nasaApiCommunicator.GetPhotos(Request.Rover, Request.Camera, Request.Sol);
 
             if (_apiResult.Item1)
             {
-                _mainView.ShowPhotos(_apiResult.Item2);
+                OnPhotosUpdated(new PhotosChangedEventArgs(_apiResult.Item2, null));
             }
             else
             {
-                _mainView.ShowError(_apiResult.Item3);
+                OnPhotosUpdated(new PhotosChangedEventArgs(null, _apiResult.Item3));
             }
         }
     }
