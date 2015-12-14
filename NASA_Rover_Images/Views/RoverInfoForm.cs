@@ -12,30 +12,33 @@ namespace NASA_Rover_Images.Views
     public partial class RoverInfoForm : Form, IRoverInfoView
     {
         private readonly INasaApiCommunicator _nasaApiCommunicator;
-        private readonly IReadOnlyDictionary<string, LinkLabel.Link> _roverLinks;
+        private readonly IReadOnlyDictionary<string, string> _roverLinks;
         private const string _loadError = "Failed to load data";
         private const string _loadingText = "Loading...";
         private string _roverName;
+        private readonly LinkLabel.Link _linkLabel;
 
-        public RoverInfoForm()
+        public RoverInfoForm(INasaApiCommunicator nasaApiCommunicator)
         {
             InitializeComponent();
-            _nasaApiCommunicator = new NasaApiCommunicator();
-            _roverLinks = new Dictionary<string, LinkLabel.Link>()
+            _nasaApiCommunicator = nasaApiCommunicator;
+            _roverLinks = new Dictionary<string, string>()
             {
-                { Rover.Curiosity, new LinkLabel.Link() { LinkData = "https://www.nasa.gov/mission_pages/msl/overview/index.html" } },
-                { Rover.Opportunity,  new LinkLabel.Link() { LinkData = "http://mars.nasa.gov/mer/overview/" } },
-                { Rover.Spirit,  new LinkLabel.Link() { LinkData = "http://mars.nasa.gov/mer/overview/" } }
+                { Rover.Curiosity, "https://www.nasa.gov/mission_pages/msl/overview/index.html" },
+                { Rover.Opportunity,  "http://mars.nasa.gov/mer/overview/"},
+                { Rover.Spirit,   "http://mars.nasa.gov/mer/overview/" }
             };
+
+            _linkLabel = new LinkLabel.Link();
+
+            linkLabelNASA.Links.Add(_linkLabel);
         }
         protected override void OnClosing(CancelEventArgs e)
         {
             e.Cancel = true;
             Hide();
-            if (linkLabelNASA.Links.Count == 1)
-            {
-                linkLabelNASA.Links.Remove(_roverLinks[_roverName]);
-            }
+
+            _linkLabel.LinkData = null;
         }
         
         private void linkLabelNASA_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -54,7 +57,7 @@ namespace NASA_Rover_Images.Views
             landingDateTextBox.Text = _loadingText;
             totalPhotosTextBox.Text = _loadingText;
             descriptionTextBox.Text = _loadingText;
-            linkLabelNASA.Links.Add(_roverLinks[roverName]);
+            _linkLabel.LinkData = _roverLinks[roverName];
 
             using (StreamReader streamReader = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "/Resources/" + roverName + "Description.txt"))
             {
