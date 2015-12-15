@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace NASA_Rover_Images.Views.ContextMenus
@@ -34,7 +36,11 @@ namespace NASA_Rover_Images.Views.ContextMenus
                 {
                     if (stream != null)
                     {
-                         _image.Save(stream, _image.RawFormat);
+                        ImageCodecInfo jpegEncoder = System.Drawing.Imaging.ImageCodecInfo.GetImageEncoders().Where(encoder => encoder.FormatDescription == "JPEG").First();
+                        EncoderParameters encoderParameters = new EncoderParameters(1);
+                        encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, 100L);
+
+                         _image.Save(stream, jpegEncoder, encoderParameters);
                     }
                 }
             }
