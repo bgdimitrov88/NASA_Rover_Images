@@ -15,7 +15,9 @@ namespace NASA_Rover_Images.Views
         private IPaginator _paginator;
         private bool _initialized;
         private IRoverInfoView _roverInfoView;
+        private ComponentResourceManager _resources;
         public bool AutoRefresh { get; set; }
+        private const string _loadingText = "Loading...";
 
         public MainForm(IMainFormPresenter mainFormPresenter, IPaginator paginator, IRoverInfoView roverInfoView)
         {
@@ -24,6 +26,7 @@ namespace NASA_Rover_Images.Views
             _presenter = mainFormPresenter;
             _paginator = paginator;
             _roverInfoView = roverInfoView;
+            _resources = new ComponentResourceManager(typeof(MainForm));
             AutoRefresh = false;
             _initialized = false;
 
@@ -42,12 +45,12 @@ namespace NASA_Rover_Images.Views
                 }
                 else
                 {
-                    clearPhotosAndAddLabel("No Photos Found");
+                    ClearPhotosAndAddLabel("No Photos Found");
                 }
             }
             else if(e.Error != null)
             {
-                clearPhotosAndAddLabel(e.Error.Errors);
+                ClearPhotosAndAddLabel(e.Error.Errors);
                 _paginator.ClearItems();
             }
         }
@@ -61,7 +64,7 @@ namespace NASA_Rover_Images.Views
         #region Events
         private void getButton_Click(object sender, EventArgs e)
         {
-            _presenter.GetPhotos();
+            LoadPhotos();
         }
 
         private void solNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -70,7 +73,7 @@ namespace NASA_Rover_Images.Views
 
             if (_initialized && AutoRefresh)
             {
-                _presenter.GetPhotos();
+                LoadPhotos();
             }
         }
 
@@ -83,7 +86,7 @@ namespace NASA_Rover_Images.Views
 
             if (_initialized && AutoRefresh)
             {
-                _presenter.GetPhotos();
+                LoadPhotos();
             }
 
             _roverInfoView.SetRover(roverName);
@@ -95,7 +98,7 @@ namespace NASA_Rover_Images.Views
 
             if (_initialized && AutoRefresh)
             {
-                _presenter.GetPhotos();
+                LoadPhotos();
             }
         }
 
@@ -166,9 +169,11 @@ namespace NASA_Rover_Images.Views
                         ImageLocation = ((Photo)photo).ImgSrc,
                         Width = 64,
                         Height = 64,
-                        SizeMode = PictureBoxSizeMode.Zoom,
+                        SizeMode = PictureBoxSizeMode.StretchImage,
                         Cursor = Cursors.Hand,
-                        BorderStyle = BorderStyle.FixedSingle
+                        BorderStyle = BorderStyle.FixedSingle,
+                        BackColor = System.Drawing.Color.White,
+                        InitialImage = ((System.Drawing.Image)(_resources.GetObject("photoLoadingSpinner")))
                     };
                     pictureBox.MouseClick += photo_Clicked;
                     pictureBox.LoadCompleted += photo_Loaded;
@@ -180,11 +185,18 @@ namespace NASA_Rover_Images.Views
             }
         }
 
-        private void clearPhotosAndAddLabel(string labelText)
+        private void ClearPhotosAndAddLabel(string labelText)
         {
             dateLabel.Text = string.Empty;
             photosFlowLayoutPanel.Controls.Clear();
             photosFlowLayoutPanel.Controls.Add(new Label() { Text = labelText });
+        }
+
+        private void LoadPhotos()
+        {
+            ClearPhotosAndAddLabel(_loadingText);
+            dateLabel.Text = _loadingText;
+            _presenter.GetPhotos();
         }
 
         #endregion

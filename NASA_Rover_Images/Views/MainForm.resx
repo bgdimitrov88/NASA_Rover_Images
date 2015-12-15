@@ -121,7 +121,7 @@
   <data name="roverInfoButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNvyMY98A
+        YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNvyMY98A
         AAJfSURBVDhPfZS/jtNAEMb9J3aSiyJOuuqyu46VWElwkYI0kSjCI9Ck4wXgOa6hoUSipzjxAtR0VAgk
         XoCCkoaeC79vYlvmBKz0ZTe7M99+Mzvj6Hg8plEUpcwJiFnbcM7FYBDCTMi89xd1XSccyU72rZ/N8kkP
         h4PQkYTg4qLwSQg+ZZ0WhRuASVHMUgjz1Wo1bHwGLUwRC90UnU4nSDwK3FQKFovFsK7NcbRYuCn7Ooux
@@ -135,9 +135,9 @@
         UpiTRkPCi0Xpb7pF1UP9W3PLAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="paginatorBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="paginatorBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAQAEAAAAAAAAAAAAAAAAAAAAA
@@ -165,5 +165,9 @@
         gKKioqKioqKioqKioqKioqKioqKiogAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
         //8AAP//AAD//wAA//8AAP//AAD//wAA//8=
 </value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="photoLoadingSpinner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Spinner.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
