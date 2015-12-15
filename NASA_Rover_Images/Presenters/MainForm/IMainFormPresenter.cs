@@ -7,7 +7,7 @@ namespace NASA_Rover_Images.Presenters.MainForm
     {
         void GetPhotos();
 
-        IReadOnlyDictionary<string, IReadOnlyList<string>> Rovers { get; }
+        IReadOnlyDictionary<string, IReadOnlyList<string>> RoverCameras { get; }
 
         IRequest Request { get; }
 

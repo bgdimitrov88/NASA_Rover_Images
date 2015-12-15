@@ -8,13 +8,13 @@ namespace NASA_Rover_Images.Presenters.MainForm
 {
     public class MainFormPresenter : IMainFormPresenter
     {
-        private readonly IReadOnlyDictionary<string, IReadOnlyList<string>> _rovers;
+        private readonly IReadOnlyDictionary<string, IReadOnlyList<string>> _roverCameras;
         private readonly IRequest _request;
         private readonly INasaApiCommunicator _nasaApiCommunicator;
         
         public MainFormPresenter(INasaApiCommunicator nasaApiCommunicator, IRequest initialRequest)
         {
-            _rovers = new Dictionary<string, IReadOnlyList<string>>()
+            _roverCameras = new Dictionary<string, IReadOnlyList<string>>()
             {
                 { Rover.Curiosity, new List<string>() { Camera.FHAZ, Camera.RHAZ, Camera.MAST, Camera.CHEMCAM, Camera.MAHLI, Camera.MARDI, Camera.NAVCAM } },
                 { Rover.Opportunity, new List<string>() { Camera.FHAZ, Camera.RHAZ, Camera.NAVCAM, Camera.PANCAM, Camera.MINITES } },
@@ -23,8 +23,8 @@ namespace NASA_Rover_Images.Presenters.MainForm
 
             //Initial request object
             _request = initialRequest;
-            _request.Camera = _rovers.First().Value.First();
-            _request.Rover = _rovers.Keys.First();
+            _request.Camera = _roverCameras.First().Value.First();
+            _request.Rover = _roverCameras.Keys.First();
             _request.Sol = 1000;
 
             _nasaApiCommunicator = nasaApiCommunicator;            
@@ -40,11 +40,11 @@ namespace NASA_Rover_Images.Presenters.MainForm
             }
         }
         
-        public IReadOnlyDictionary<string, IReadOnlyList<string>> Rovers
+        public IReadOnlyDictionary<string, IReadOnlyList<string>> RoverCameras
         {
             get
             {
-                return _rovers;
+                return _roverCameras;
             }
         }
 

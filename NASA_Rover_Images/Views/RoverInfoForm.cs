@@ -83,7 +83,14 @@ namespace NASA_Rover_Images.Views
 
         public void ShowRoverInfo()
         {
-            Show();
+            if(!Visible)
+            {
+                Show();
+            }
+            else
+            {
+                BringToFront();
+            }
         }
 
         public void HideRoverInfo()

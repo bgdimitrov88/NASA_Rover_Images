@@ -79,7 +79,7 @@ namespace NASA_Rover_Images.Views
             string roverName = roverNameComboBox.SelectedItem.ToString();
             _presenter.Request.Rover = roverName;
             //Only show cameras for this specific rover
-            cameraComboBox.DataSource = _presenter.Rovers[roverName];
+            cameraComboBox.DataSource = _presenter.RoverCameras[roverName];
 
             if (_initialized && AutoRefresh)
             {
@@ -147,8 +147,8 @@ namespace NASA_Rover_Images.Views
         private void BindFromModel()
         {
             paginatorBindingSource.DataSource = _paginator;
-            cameraComboBox.DataSource = _presenter.Rovers.First().Value;
-            roverNameComboBox.DataSource = _presenter.Rovers.Select(rover => rover.Key).ToList();
+            cameraComboBox.DataSource = _presenter.RoverCameras.First().Value;
+            roverNameComboBox.DataSource = _presenter.RoverCameras.Select(rover => rover.Key).ToList();
             solNumericUpDown.Value = _presenter.Request.Sol;
             autoRefreshCheckBox.DataBindings.Add("Checked", this, "AutoRefresh", false, DataSourceUpdateMode.OnPropertyChanged);
         }
@@ -182,6 +182,7 @@ namespace NASA_Rover_Images.Views
 
         private void clearPhotosAndAddLabel(string labelText)
         {
+            dateLabel.Text = string.Empty;
             photosFlowLayoutPanel.Controls.Clear();
             photosFlowLayoutPanel.Controls.Add(new Label() { Text = labelText });
         }
