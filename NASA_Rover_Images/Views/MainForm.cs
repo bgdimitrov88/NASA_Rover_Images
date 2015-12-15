@@ -34,23 +34,21 @@ namespace NASA_Rover_Images.Views
         {
             if(e.Photos != null)
             {
+                _paginator.SetItems(e.Photos);
+
                 if(e.Photos.Count > 0)
                 {
-                    _paginator.SetPhotos(e.Photos);
                     refreshPhotos();
                 }
                 else
                 {
-                    photosFlowLayoutPanel.Controls.Clear();
-                    photosFlowLayoutPanel.Controls.Add(new Label() { Text = "No Photos Found" });
-                    _paginator.SetPhotos(null);
+                    clearPhotosAndAddLabel("No Photos Found");
                 }
             }
             else if(e.Error != null)
             {
-                photosFlowLayoutPanel.Controls.Clear();
-                photosFlowLayoutPanel.Controls.Add(new Label() { Text = e.Error.Errors });
-                _paginator.SetPhotos(null);
+                clearPhotosAndAddLabel(e.Error.Errors);
+                _paginator.ClearItems();
             }
         }
 
@@ -180,6 +178,12 @@ namespace NASA_Rover_Images.Views
 
                 dateLabel.Text = DateTime.Parse(((Photo)_paginator.CurrentPageContent.First()).EarthDate).ToShortDateString();
             }
+        }
+
+        private void clearPhotosAndAddLabel(string labelText)
+        {
+            photosFlowLayoutPanel.Controls.Clear();
+            photosFlowLayoutPanel.Controls.Add(new Label() { Text = labelText });
         }
 
         #endregion

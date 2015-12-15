@@ -4,7 +4,9 @@ namespace NASA_Rover_Images.Utils
 {
     public interface IPaginator
     {
-        void SetPhotos(IReadOnlyList<object> items);
+        void SetItems(IReadOnlyList<object> items);
+
+        void ClearItems();
 
         bool Next();
 

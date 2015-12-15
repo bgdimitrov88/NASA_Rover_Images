@@ -17,9 +17,9 @@ namespace NASA_Rover_Images.Utils
             _pagingInfo = string.Format(_pagingInfoFormat, 0, 0);
     }
 
-        public void SetPhotos(IReadOnlyList<object> items)
+        public void SetItems(IReadOnlyList<object> items)
         {
-            if(items != null)
+            if(items != null && items.Count > 0)
             {
                 _items = items;
 
@@ -34,10 +34,14 @@ namespace NASA_Rover_Images.Utils
             }
             else
             {
-                TotalPages = 0;
-                Update(0);
+                ClearItems();
             }
+        }
 
+        public void ClearItems()
+        {
+            TotalPages = 0;
+            Update(0);
         }
 
         public bool Next()
