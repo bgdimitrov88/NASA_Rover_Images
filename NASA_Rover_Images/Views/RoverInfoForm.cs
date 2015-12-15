@@ -51,33 +51,36 @@ namespace NASA_Rover_Images.Views
 
         public async Task SetRover(string roverName)
         {
-            _roverName = roverName;
-
-            nameTextBox.Text = roverName;
-            landingDateTextBox.Text = _loadingText;
-            totalPhotosTextBox.Text = _loadingText;
-            descriptionTextBox.Text = _loadingText;
-            _linkLabel.LinkData = _roverLinks[roverName];
-
-            using (StreamReader streamReader = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "/Resources/" + roverName + "Description.txt"))
+            if(roverName != _roverName)
             {
-                descriptionTextBox.Text = streamReader.ReadToEnd();
-            }
+                _roverName = roverName;
 
-            //Get a sample picture to extract variable field data - total photos, max sol etc.
-            Tuple<bool, IReadOnlyList<Photo>, Error> apiResult = await _nasaApiCommunicator.GetPhotos(roverName, Camera.FHAZ, 50);
+                nameTextBox.Text = roverName;
+                landingDateTextBox.Text = _loadingText;
+                totalPhotosTextBox.Text = _loadingText;
+                descriptionTextBox.Text = _loadingText;
+                _linkLabel.LinkData = _roverLinks[roverName];
 
-            if (apiResult.Item1)
-            {
-                Rover rover = apiResult.Item2[0].Rover;
+                using (StreamReader streamReader = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "/Resources/" + roverName + "Description.txt"))
+                {
+                    descriptionTextBox.Text = streamReader.ReadToEnd();
+                }
 
-                landingDateTextBox.Text = rover.LandingDate.ToString();
-                totalPhotosTextBox.Text = rover.TotalPhotos.ToString();
-            }
-            else
-            {
-                landingDateTextBox.Text = _loadError;
-                totalPhotosTextBox.Text = _loadError;
+                //Get a sample picture to extract variable field data - total photos, max sol etc.
+                Tuple<bool, IReadOnlyList<Photo>, Error> apiResult = await _nasaApiCommunicator.GetPhotos(roverName, Camera.FHAZ, 50);
+
+                if (apiResult.Item1)
+                {
+                    Rover rover = apiResult.Item2[0].Rover;
+
+                    landingDateTextBox.Text = rover.LandingDate.ToString();
+                    totalPhotosTextBox.Text = rover.TotalPhotos.ToString();
+                }
+                else
+                {
+                    landingDateTextBox.Text = _loadError;
+                    totalPhotosTextBox.Text = _loadError;
+                }
             }
         }
 
