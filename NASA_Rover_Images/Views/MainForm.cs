@@ -143,6 +143,14 @@ namespace NASA_Rover_Images.Views
             _roverInfoView.ShowRoverInfo();
         }
 
+        private void autoRefreshCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (autoRefreshCheckBox.CheckState == CheckState.Checked)
+            {
+                LoadPhotos();
+            }
+        }
+
         #endregion
 
         #region Helpers

@@ -15,7 +15,7 @@ namespace NASA_Rover_Images.Utils
         {
             ItemsPerPage = itemsPerPage;
             _pagingInfo = string.Format(_pagingInfoFormat, 0, 0);
-    }
+        }
 
         public void SetItems(IReadOnlyList<object> items)
         {

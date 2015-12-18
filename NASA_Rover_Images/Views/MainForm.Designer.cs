@@ -100,6 +100,7 @@
             this.autoRefreshCheckBox.Text = "Auto Refresh";
             this.autoRefreshCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.autoRefreshCheckBox.UseVisualStyleBackColor = true;
+            this.autoRefreshCheckBox.CheckedChanged += new System.EventHandler(this.autoRefreshCheckBox_CheckedChanged);
             // 
             // solNumericUpDown
             // 
