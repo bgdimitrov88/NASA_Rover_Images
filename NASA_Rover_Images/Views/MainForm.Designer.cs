@@ -47,6 +47,8 @@
             this.roverNameLabel = new System.Windows.Forms.Label();
             this.roverNameComboBox = new System.Windows.Forms.ComboBox();
             this.paginatorBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.earthDayLabel = new System.Windows.Forms.Label();
+            this.earthDatePicker = new System.Windows.Forms.DateTimePicker();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.solNumericUpDown)).BeginInit();
             this.paginatorPanel.SuspendLayout();
@@ -55,6 +57,8 @@
             // 
             // MainPanel
             // 
+            this.MainPanel.Controls.Add(this.earthDatePicker);
+            this.MainPanel.Controls.Add(this.earthDayLabel);
             this.MainPanel.Controls.Add(this.roverInfoButton);
             this.MainPanel.Controls.Add(this.dateLabel);
             this.MainPanel.Controls.Add(this.autoRefreshCheckBox);
@@ -68,7 +72,7 @@
             this.MainPanel.Controls.Add(this.roverNameComboBox);
             this.MainPanel.Location = new System.Drawing.Point(4, 2);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(316, 418);
+            this.MainPanel.Size = new System.Drawing.Size(311, 479);
             this.MainPanel.TabIndex = 0;
             // 
             // roverInfoButton
@@ -85,7 +89,7 @@
             // dateLabel
             // 
             this.dateLabel.AutoSize = true;
-            this.dateLabel.Location = new System.Drawing.Point(128, 132);
+            this.dateLabel.Location = new System.Drawing.Point(127, 165);
             this.dateLabel.Name = "dateLabel";
             this.dateLabel.Size = new System.Drawing.Size(0, 13);
             this.dateLabel.TabIndex = 11;
@@ -93,7 +97,7 @@
             // autoRefreshCheckBox
             // 
             this.autoRefreshCheckBox.AutoSize = true;
-            this.autoRefreshCheckBox.Location = new System.Drawing.Point(216, 129);
+            this.autoRefreshCheckBox.Location = new System.Drawing.Point(215, 162);
             this.autoRefreshCheckBox.Name = "autoRefreshCheckBox";
             this.autoRefreshCheckBox.Size = new System.Drawing.Size(88, 17);
             this.autoRefreshCheckBox.TabIndex = 10;
@@ -111,7 +115,7 @@
             0,
             0});
             this.solNumericUpDown.Name = "solNumericUpDown";
-            this.solNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.solNumericUpDown.Size = new System.Drawing.Size(172, 20);
             this.solNumericUpDown.TabIndex = 9;
             this.solNumericUpDown.ValueChanged += new System.EventHandler(this.solNumericUpDown_ValueChanged);
             // 
@@ -121,7 +125,7 @@
             this.paginatorPanel.Controls.Add(this.nextButton);
             this.paginatorPanel.Controls.Add(this.previousButton);
             this.paginatorPanel.Controls.Add(this.photosFlowLayoutPanel);
-            this.paginatorPanel.Location = new System.Drawing.Point(9, 159);
+            this.paginatorPanel.Location = new System.Drawing.Point(8, 192);
             this.paginatorPanel.Name = "paginatorPanel";
             this.paginatorPanel.Size = new System.Drawing.Size(291, 256);
             this.paginatorPanel.TabIndex = 8;
@@ -165,7 +169,7 @@
             // 
             // getButton
             // 
-            this.getButton.Location = new System.Drawing.Point(15, 129);
+            this.getButton.Location = new System.Drawing.Point(14, 162);
             this.getButton.Name = "getButton";
             this.getButton.Size = new System.Drawing.Size(75, 23);
             this.getButton.TabIndex = 7;
@@ -177,7 +181,7 @@
             // 
             this.cameraComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cameraComboBox.FormattingEnabled = true;
-            this.cameraComboBox.Location = new System.Drawing.Point(96, 87);
+            this.cameraComboBox.Location = new System.Drawing.Point(95, 120);
             this.cameraComboBox.Name = "cameraComboBox";
             this.cameraComboBox.Size = new System.Drawing.Size(121, 21);
             this.cameraComboBox.TabIndex = 6;
@@ -186,7 +190,7 @@
             // cameraLabel
             // 
             this.cameraLabel.AutoSize = true;
-            this.cameraLabel.Location = new System.Drawing.Point(12, 87);
+            this.cameraLabel.Location = new System.Drawing.Point(11, 120);
             this.cameraLabel.Name = "cameraLabel";
             this.cameraLabel.Size = new System.Drawing.Size(46, 13);
             this.cameraLabel.TabIndex = 5;
@@ -225,11 +229,27 @@
             // 
             this.paginatorBindingSource.DataSource = typeof(NASA_Rover_Images.Utils.Paginator);
             // 
+            // earthDayLabel
+            // 
+            this.earthDayLabel.AutoSize = true;
+            this.earthDayLabel.Location = new System.Drawing.Point(12, 85);
+            this.earthDayLabel.Name = "earthDayLabel";
+            this.earthDayLabel.Size = new System.Drawing.Size(33, 13);
+            this.earthDayLabel.TabIndex = 13;
+            this.earthDayLabel.Text = "Date:";
+            // 
+            // earthDatePicker
+            // 
+            this.earthDatePicker.Location = new System.Drawing.Point(95, 85);
+            this.earthDatePicker.Name = "earthDatePicker";
+            this.earthDatePicker.Size = new System.Drawing.Size(173, 20);
+            this.earthDatePicker.TabIndex = 14;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(325, 424);
+            this.ClientSize = new System.Drawing.Size(317, 482);
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -264,6 +284,8 @@
         private System.Windows.Forms.CheckBox autoRefreshCheckBox;
         private System.Windows.Forms.Label dateLabel;
         private System.Windows.Forms.Button roverInfoButton;
+        private System.Windows.Forms.DateTimePicker earthDatePicker;
+        private System.Windows.Forms.Label earthDayLabel;
     }
 }
 
