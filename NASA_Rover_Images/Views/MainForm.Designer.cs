@@ -46,9 +46,9 @@
             this.solLabel = new System.Windows.Forms.Label();
             this.roverNameLabel = new System.Windows.Forms.Label();
             this.roverNameComboBox = new System.Windows.Forms.ComboBox();
-            this.paginatorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.earthDayLabel = new System.Windows.Forms.Label();
             this.earthDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.paginatorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.solNumericUpDown)).BeginInit();
             this.paginatorPanel.SuspendLayout();
@@ -225,10 +225,6 @@
             this.roverNameComboBox.TabIndex = 0;
             this.roverNameComboBox.SelectedValueChanged += new System.EventHandler(this.roverNameComboBox_SelectedValueChanged);
             // 
-            // paginatorBindingSource
-            // 
-            this.paginatorBindingSource.DataSource = typeof(NASA_Rover_Images.Utils.Paginator);
-            // 
             // earthDayLabel
             // 
             this.earthDayLabel.AutoSize = true;
@@ -244,6 +240,11 @@
             this.earthDatePicker.Name = "earthDatePicker";
             this.earthDatePicker.Size = new System.Drawing.Size(173, 20);
             this.earthDatePicker.TabIndex = 14;
+            this.earthDatePicker.ValueChanged += new System.EventHandler(this.earthDatePicker_ValueChanged);
+            // 
+            // paginatorBindingSource
+            // 
+            this.paginatorBindingSource.DataSource = typeof(NASA_Rover_Images.Utils.Paginator);
             // 
             // MainForm
             // 

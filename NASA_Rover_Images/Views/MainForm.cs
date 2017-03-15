@@ -27,7 +27,7 @@ namespace NASA_Rover_Images.Views
             _paginator = paginator;
             _roverInfoView = roverInfoView;
             _resources = new ComponentResourceManager(typeof(MainForm));
-            AutoRefresh = false;
+            AutoRefresh = true;
             _initialized = false;
 
             _presenter.PhotosUpdated += OnPhotosUpdated;
@@ -69,7 +69,26 @@ namespace NASA_Rover_Images.Views
 
         private void solNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            _presenter.Request.Sol = (int) solNumericUpDown.Value;
+            var sol = (int)solNumericUpDown.Value;
+            LoadPhotosForSol(sol);
+
+            var roverLandingDate = _presenter.RoverLandingDates.First(x => x.Key == roverNameComboBox.SelectedItem.ToString()).Value;
+            earthDatePicker.Value = roverLandingDate.AddDays(sol);
+        }
+
+        private void earthDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            var roverLandingDate = _presenter.RoverLandingDates.First(x => x.Key == roverNameComboBox.SelectedItem.ToString()).Value;
+            var sol = (earthDatePicker.Value - roverLandingDate).Days;
+
+            LoadPhotosForSol(sol);
+
+            solNumericUpDown.Value = sol;
+        }
+
+        private void LoadPhotosForSol(int sol)
+        {
+            _presenter.Request.Sol = sol;
 
             if (_initialized && AutoRefresh)
             {
@@ -83,6 +102,8 @@ namespace NASA_Rover_Images.Views
             _presenter.Request.Rover = roverName;
             //Only show cameras for this specific rover
             cameraComboBox.DataSource = _presenter.RoverCameras[roverName];
+            earthDatePicker.MinDate = _presenter.RoverLandingDates.First(x => x.Key == roverNameComboBox.SelectedItem.ToString()).Value;
+            earthDatePicker.Value = _presenter.RoverLandingDates.First(x => x.Key == roverNameComboBox.SelectedItem.ToString()).Value.AddDays(_presenter.Request.Sol);
 
             if (_initialized && AutoRefresh)
             {
@@ -161,6 +182,8 @@ namespace NASA_Rover_Images.Views
             cameraComboBox.DataSource = _presenter.RoverCameras.First().Value;
             roverNameComboBox.DataSource = _presenter.RoverCameras.Select(rover => rover.Key).ToList();
             solNumericUpDown.Value = _presenter.Request.Sol;
+            earthDatePicker.MinDate = _presenter.RoverLandingDates.First().Value;
+            earthDatePicker.Value = _presenter.RoverLandingDates.First().Value.AddDays(_presenter.Request.Sol);
             autoRefreshCheckBox.DataBindings.Add("Checked", this, "AutoRefresh", false, DataSourceUpdateMode.OnPropertyChanged);
         }
 

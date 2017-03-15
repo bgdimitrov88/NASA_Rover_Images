@@ -9,6 +9,7 @@ namespace NASA_Rover_Images.Presenters.MainForm
     public class MainFormPresenter : IMainFormPresenter
     {
         private readonly IReadOnlyDictionary<string, IReadOnlyList<string>> _roverCameras;
+        private readonly IReadOnlyDictionary<string, DateTime> _roverLandingDates;
         private readonly IRequest _request;
         private readonly INasaApiCommunicator _nasaApiCommunicator;
         
@@ -19,6 +20,13 @@ namespace NASA_Rover_Images.Presenters.MainForm
                 { Rover.Curiosity, new List<string>() { Camera.FHAZ, Camera.RHAZ, Camera.MAST, Camera.CHEMCAM, Camera.MAHLI, Camera.MARDI, Camera.NAVCAM } },
                 { Rover.Opportunity, new List<string>() { Camera.FHAZ, Camera.RHAZ, Camera.NAVCAM, Camera.PANCAM, Camera.MINITES } },
                 { Rover.Spirit, new List<string>() { Camera.FHAZ, Camera.RHAZ, Camera.NAVCAM, Camera.PANCAM, Camera.MINITES } }
+            };
+
+            _roverLandingDates = new Dictionary<string, DateTime>()
+            {
+                {Rover.Curiosity, new DateTime(2012, 8, 6, 5, 17, 0, DateTimeKind.Utc) },
+                {Rover.Opportunity, new DateTime(2004, 1, 25, 0, 0, 0, DateTimeKind.Utc) },
+                {Rover.Spirit, new DateTime(2004, 1, 4, 4, 35, 0, DateTimeKind.Utc) }
             };
 
             //Initial request object
@@ -45,6 +53,14 @@ namespace NASA_Rover_Images.Presenters.MainForm
             get
             {
                 return _roverCameras;
+            }
+        }
+
+        public IReadOnlyDictionary<string, DateTime> RoverLandingDates
+        {
+            get
+            {
+                return _roverLandingDates;
             }
         }
 
